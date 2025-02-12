@@ -1,0 +1,60 @@
+{
+  "name": "SctgDesk Server",
+  "package": "cloud.lazycat.app.sctgdesk-server",
+  "description": "一个修改版的 RustDesk 服务器程序",
+  "homepage": "https://github.com/sctg-development/sctgdesk-server",
+  "author": "sctg-development",
+  "app_features": [],
+  "subdomain": "sctgdesk-server",
+  "version": "1.1.99",
+  "iconPath": "logo.png",
+  "composePath": "docker-compose.yml",
+  "unsupported_platforms": [
+    "ios",
+    "android"
+  ],
+  "lastRouteType": "from_compose",
+  "port_mappings": {
+    "hbbs_21114_21114": {
+      "use": true,
+      "type": "http",
+      "path": "/",
+      "targetPath": "/"
+    },
+    "hbbs_21115_21115": {
+      "use": true,
+      "type": "port",
+      "protocol": "tcp"
+    },
+    "hbbs_21116_21116": {
+      "use": true,
+      "type": "port",
+      "protocol": "udp"
+    },
+    "hbbs_21118_21118": {
+      "use": true,
+      "type": "port",
+      "protocol": "tcp"
+    },
+    "hbbr_21117_21117": {
+      "use": true,
+      "type": "port",
+      "protocol": "tcp"
+    },
+    "hbbr_21119_21119": {
+      "use": true,
+      "type": "port",
+      "protocol": "tcp"
+    }
+  },
+  "image_sctg_sctgdesk-server_latest": {
+    "originalImage": "sctg/sctgdesk-server:latest",
+    "pushTarget": "lazycat",
+    "newImageName": "registry.lazycat.cloud/czyt/sctg/sctgdesk-server:b3c1c8c75843f25d",
+    "timestamp": "2025-02-12T16:45:16.066Z"
+  },
+  "hbbs_volume_/usr/local/share/sctgdesk_action": "emptyDir",
+  "hbbs_volume_/usr/local/share/sctgdesk_location": "app_data",
+  "hbbr_volume_/usr/local/share/sctgdesk_action": "emptyDir",
+  "hbbr_volume_/usr/local/share/sctgdesk_location": "app_data"
+}

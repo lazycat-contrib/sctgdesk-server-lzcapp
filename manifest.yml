@@ -1,0 +1,60 @@
+lzc-sdk-version: "0.1"
+name: SctgDesk Server
+package: cloud.lazycat.app.sctgdesk-server
+version: 1.1.99
+description: 一个修改版的 RustDesk 服务器程序
+usage: |
+  安装好以后通过浏览器打开，然后在rustdesk客户端选项进行设置
+  比如懒猫分配的域名是：sctgdesk-server.设备名.heiyu.space
+  你在ID服务器这里 填写：sctgdesk-server.设备名.heiyu.space
+  在API服务器这里 填写：https://sctgdesk-server.设备名.heiyu.space
+  保存，使用默认账号 admin 密码 Hello,world! 在客户端登录即可，这时您
+  使用密码在web登录，应该可以看到刚才添加的设备。
+homepage: https://github.com/sctg-development/sctgdesk-server
+author: sctg-development
+application:
+  subdomain: sctgdesk-server
+  background_task: true
+  multi_instance: false
+  gpu_accel: false
+  kvm_accel: false
+  usb_accel: false
+  routes:
+    - /=http://hbbs.cloud.lazycat.app.sctgdesk-server.lzcapp:21114/
+  public_path:
+    - /
+  ingress:
+    - protocol: tcp
+      port: 21115
+      service: hbbs
+    - protocol: tcp
+      port: 21116
+      service: hbbs
+    - protocol: udp
+      port: 21116
+      service: hbbs
+    - protocol: tcp
+      port: 21118
+      service: hbbs
+    - protocol: tcp
+      port: 21117
+      service: hbbr
+    - protocol: tcp
+      port: 21119
+      service: hbbr
+services:
+  hbbs:
+    image: registry.lazycat.cloud/czyt/sctg/sctgdesk-server:b3c1c8c75843f25d
+    command: hbbs -r sctgdesk.example.com:21117
+    depends_on:
+      - hbbr
+    binds:
+      - /lzcapp/var/sctgdesk:/usr/local/share/sctgdesk
+  hbbr:
+    image: registry.lazycat.cloud/czyt/sctg/sctgdesk-server:b3c1c8c75843f25d
+    command: hbbr
+    binds:
+      - /lzcapp/var/sctgdesk:/usr/local/share/sctgdesk
+unsupported_platforms:
+  - ios
+  - android
