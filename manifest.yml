@@ -19,11 +19,12 @@ application:
   gpu_accel: false
   kvm_accel: false
   usb_accel: false
+  oidc_redirect_path: /api/oidc/callback
   routes:
     - /=http://host.lzcapp:21114/
   public_path:
     - /
-  
+
 services:
   hbbs:
     image: docker.1ms.run/sctg/sctgdesk-server:1.1.99.47
@@ -33,7 +34,7 @@ services:
     network_mode: host
     binds:
       - /lzcapp/var/data:/usr/local/share/sctgdesk
-      
+
   hbbr:
     image: docker.1ms.run/sctg/sctgdesk-server:1.1.99.47
     command: hbbr
