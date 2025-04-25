@@ -1,7 +1,7 @@
 lzc-sdk-version: "0.1"
 name: SctgDesk Server
 package: cloud.lazycat.app.sctgdesk-server
-version: 1.1.99
+version: 1.1.100
 description: 一个修改版的 RustDesk 服务器程序
 usage: |
   安装好以后通过浏览器打开，然后在rustdesk客户端选项进行设置
@@ -33,6 +33,7 @@ services:
     network_mode: host
     binds:
       - /lzcapp/var/data:/usr/local/share/sctgdesk
+      
   hbbr:
     image: docker.1ms.run/sctg/sctgdesk-server:1.1.99.47
     command: hbbr
