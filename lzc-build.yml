@@ -3,4 +3,4 @@ manifest: ./manifest.yml
 
 # pkgout: lpk 包的输出路径
 pkgout: ./
-icon: ./logo.png
+icon: ./icon.png

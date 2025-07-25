@@ -1,7 +1,6 @@
-lzc-sdk-version: "0.1"
 name: SctgDesk Server
 package: cloud.lazycat.app.sctgdesk-server
-version: 1.1.100
+version: 1.1.101
 description: 一个修改版的 RustDesk 服务器程序
 usage: |
   安装好以后通过浏览器打开，然后在rustdesk客户端选项进行设置
@@ -15,10 +14,6 @@ author: sctg-development
 application:
   subdomain: sctgdesk-server
   background_task: true
-  multi_instance: false
-  gpu_accel: false
-  kvm_accel: false
-  usb_accel: false
   oidc_redirect_path: /api/oidc/callback
   routes:
     - /=http://host.lzcapp:21114/
@@ -28,6 +23,10 @@ application:
 services:
   hbbs:
     image: docker.1ms.run/sctg/sctgdesk-server:1.1.99.47
+    environment:
+{{if .U.restrict_access_to_server}}
+      - LOGGED_IN_ONLY=Y
+{{end}}
     command: hbbs -r hbbr:21117
     depends_on:
       - hbbr
@@ -41,6 +40,7 @@ services:
     binds:
       - /lzcapp/var/data:/usr/local/share/sctgdesk
     network_mode: host
+
 unsupported_platforms:
   - ios
   - android

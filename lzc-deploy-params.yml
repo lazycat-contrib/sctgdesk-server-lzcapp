@@ -1,0 +1,12 @@
+params:
+  - id: restrict_access_to_server
+    type: bool
+    name: "🔐restrict access to your server"
+    description: "Even with this option enabled, users can still register on the Rendez-vous server, but they won't be able to control another user's peer. If someone tries to control a peer without being logged in, they'll receive an error message"
+    default_value: false
+
+locales:
+  zh:
+    restrict_access_to_server:
+      name: "🔐限制对服务器的访问"
+      description: "即使启用此选项，用户仍然可以在 Rendez-vous 服务器上注册，但他们将无法控制其他用户的对等方。如果有人尝试在未登录的情况下控制对等方，他们将收到一条错误消息。"
