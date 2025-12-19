@@ -1,6 +1,6 @@
 name: SctgDesk Server
 package: cloud.lazycat.app.sctgdesk-server
-version: 1.1.101
+version: 1.1.102
 min_os_version: 1.3.8
 description: 一个修改版的 RustDesk 服务器程序
 usage: |
@@ -16,14 +16,18 @@ application:
   subdomain: sctgdesk-server
   background_task: true
   oidc_redirect_path: /api/oidc/callback
-  routes:
-    - /=http://host.lzcapp:21114/
   public_path:
     - /
 
+  upstreams:
+    - location: /
+      backend: http://host.lzcapp:21114/
+
+
 services:
   hbbs:
-    image: docker.1ms.run/sctg/sctgdesk-server:1.1.99.47
+    # sctg/sctgdesk-server:1.1.99.48
+    image: registry.lazycat.cloud/czyt/sctg/sctgdesk-server:8568454bfbb9ac09
     environment:
 {{if .U.restrict_access_to_server}}
       - LOGGED_IN_ONLY=Y
@@ -36,11 +40,19 @@ services:
       - /lzcapp/var/data:/usr/local/share/sctgdesk
 
   hbbr:
-    image: docker.1ms.run/sctg/sctgdesk-server:1.1.99.47
+    image: registry.lazycat.cloud/czyt/sctg/sctgdesk-server:8568454bfbb9ac09
     command: hbbr
     binds:
       - /lzcapp/var/data:/usr/local/share/sctgdesk
     network_mode: host
+
+locales:
+  zh:
+    name: "SctgDesk Server"
+    description: "一个修改版的 RustDesk 服务器程序"
+  en:
+    name: "SctgDesk Server"
+    description: "Rendez-vous server, API server and web console for Rustdesk 100% in Rust"
 
 unsupported_platforms:
   - ios
