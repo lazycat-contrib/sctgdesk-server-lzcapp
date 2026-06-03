@@ -1,0 +1,23 @@
+package: cloud.lazycat.app.sctgdesk-server
+version: 1.2.101
+name: SctgDesk Server
+description: 一个修改版的 RustDesk 服务器程序
+homepage: https://github.com/sctg-development/sctgdesk-server
+author: sctg-development
+min_os_version: 1.5.0
+
+unsupported_platforms:
+  - ios
+  - android
+
+permissions:
+  required:
+    - net.internet
+
+locales:
+  zh:
+    name: "SctgDesk Server"
+    description: "一个修改版的 RustDesk 服务器程序"
+  en:
+    name: "SctgDesk Server"
+    description: "Rendez-vous server, API server and web console for Rustdesk 100% in Rust"

@@ -1,0 +1,41 @@
+application:
+  subdomain: sctgdesk-server
+  background_task: true
+  oidc_redirect_path: /api/oidc/callback
+  public_path:
+    - /
+
+  upstreams:
+    - location: /
+      backend: http://host.lzcapp:21114/
+
+
+services:
+  hbbs:
+    # sctg/sctgdesk-server:1.1.99.48
+    image: registry.lazycat.cloud/czyt/sctg/sctgdesk-server:8568454bfbb9ac09
+{{if .U.restrict_access_to_server}}
+    environment:
+      - LOGGED_IN_ONLY=Y
+{{end}}
+    command: hbbs -r hbbr:21117
+    depends_on:
+      - hbbr
+    network_mode: host
+    binds:
+      - /lzcapp/var/data:/usr/local/share/sctgdesk
+
+  hbbr:
+    image: registry.lazycat.cloud/czyt/sctg/sctgdesk-server:8568454bfbb9ac09
+    command: hbbr
+    binds:
+      - /lzcapp/var/data:/usr/local/share/sctgdesk
+    network_mode: host
+
+usage: |
+  安装好以后通过浏览器打开，然后在rustdesk客户端选项进行设置
+  比如懒猫分配的域名是：sctgdesk-server.设备名.heiyu.space
+  你在ID服务器这里 填写：sctgdesk-server.设备名.heiyu.space
+  在API服务器这里 填写：https://sctgdesk-server.设备名.heiyu.space
+  保存，使用默认账号 admin 密码 Hello,world! 在客户端登录即可，这时您
+  使用密码在web登录，应该可以看到刚才添加的设备。
