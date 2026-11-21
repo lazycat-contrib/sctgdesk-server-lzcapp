@@ -22,9 +22,9 @@ images:
     source: sctg/sctgdesk-server
     channel: custom
     sort: semver
-    tag_regex: '^1\.1\.99\.\d+$'
-    version_regex: '^1\.1\.99\.(?P<version>\d+)$'
-    version_template: '1.1.99-{version}'
+    tag_regex: '^(?:sctg-v\d+\.\d+\.\d+-sctg\.\d+|\d+\.\d+\.\d+\.\d+)$'
+    version_regex: '^(?:(?:sctg-v)?(?P<version>\d+\.\d+\.\d+)(?:-sctg\.|\.)(?P<build>\d+))$'
+    version_template: '{version}-{build}'
     delivery:
       mode: lazycat
   - id: hbbr
@@ -33,9 +33,9 @@ images:
     source: sctg/sctgdesk-server
     channel: custom
     sort: semver
-    tag_regex: '^1\.1\.99\.\d+$'
-    version_regex: '^1\.1\.99\.(?P<version>\d+)$'
-    version_template: '1.1.99-{version}'
+    tag_regex: '^(?:sctg-v\d+\.\d+\.\d+-sctg\.\d+|\d+\.\d+\.\d+\.\d+)$'
+    version_regex: '^(?:(?:sctg-v)?(?P<version>\d+\.\d+\.\d+)(?:-sctg\.|\.)(?P<build>\d+))$'
+    version_template: '{version}-{build}'
     delivery:
       mode: lazycat
 stores:
